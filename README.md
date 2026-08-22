@@ -17,7 +17,7 @@ type a thought and **"file"** it as a dated entry that everyone else can
 scroll through — no login, no accounts, no names attached.
 
 <!-- Replace the # below with your live deployment URL once hosted -->
-[![Try it live]  https://typewritter-diary.netlify.app/ type=rounded&color=0:6B4A2F,100:2B1E16&height=80&section=header&text=TRY%20IT%20LIVE&fontSize=28&fontColor=F4E3C1&animation=twinkling&fontAlignY=62&width=420)](#)
+[![Try it live](https://capsule-render.vercel.app/api?type=rounded&color=0:6B4A2F,100:2B1E16&height=80&section=header&text=TRY%20IT%20LIVE&fontSize=28&fontColor=F4E3C1&animation=twinkling&fontAlignY=62&width=420)](#)
 <!-- Replace Gul/typewriter-diary below with your actual GitHub path -->
 ![Source](https://img.shields.io/badge/📦%20Source-typewriter--diary-2B1E16?style=for-the-badge&labelColor=C98A3E)
 
