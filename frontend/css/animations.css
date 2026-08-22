@@ -1,0 +1,73 @@
+/* ===================================================================
+   THE TYPEWRITER DIARY — Motion
+   One signature moment: pressing "File this entry" tears the sheet
+   out of the typewriter and it settles into the pile below. Everything
+   else (caret blink, key feedback) stays small and quiet.
+   =================================================================== */
+
+/* ---- Blinking caret shown after the last typed character ---- */
+@keyframes caretBlink {
+  0%, 49%  { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.type-caret {
+  animation: caretBlink 1s steps(1) infinite;
+}
+
+/* ---- Subtle "key press" feedback on the paper well when a
+   character is typed — main.js/typewriter.js toggles this class
+   for ~80ms per keystroke. ---- */
+@keyframes keyPress {
+  0%   { transform: translateY(0); }
+  40%  { transform: translateY(1px); }
+  100% { transform: translateY(0); }
+}
+
+.paper-sheet-well.is-keypress .paper-sheet {
+  animation: keyPress 0.08s ease-out;
+}
+
+/* ---- Filing an entry: the sheet lifts, tilts, and drops away,
+   then a new blank sheet fades in underneath. Driven by toggling
+   .is-filing on .paper-sheet-well from typewriter.js. ---- */
+@keyframes tearAndFile {
+  0%   { transform: translateY(0) rotate(0deg);   opacity: 1; }
+  25%  { transform: translateY(-14px) rotate(-1deg); opacity: 1; }
+  100% { transform: translateY(160px) rotate(8deg); opacity: 0; }
+}
+
+.paper-sheet.is-filing {
+  animation: tearAndFile 0.55s cubic-bezier(0.5, 0, 0.75, 0.6) forwards;
+  pointer-events: none;
+}
+
+@keyframes freshSheetIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.paper-sheet.is-fresh {
+  animation: freshSheetIn 0.4s ease-out;
+}
+
+/* ---- New page landing in the feed: a small settle so it reads as
+   "just filed," without re-animating the whole stack. ---- */
+@keyframes pageSettle {
+  from { opacity: 0; transform: translateY(-10px) rotate(-2deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(var(--page-tilt, 0deg)); }
+}
+
+.diary-page.is-new {
+  animation: pageSettle 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ---- Loaded-more pages: a gentle staggered fade, not a bounce ---- */
+@keyframes pageFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.diary-page.is-loaded {
+  animation: pageFadeIn 0.35s ease-out both;
+}

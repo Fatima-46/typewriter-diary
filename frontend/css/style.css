@@ -1,0 +1,397 @@
+/* ===================================================================
+   THE TYPEWRITER DIARY — Core Theme
+   Palette: aged parchment / faded ink / forest accent / stamp-red
+   Type: Special Elite (typewriter, used throughout) + Crimson Text
+         (readable serif, reserved for small UI labels/captions)
+   =================================================================== */
+
+:root {
+  --paper: #ede3c8;
+  --paper-shadow: #d8c9a3;
+  --paper-dark: #cabb96;
+  --desk: #2e2620;
+  --desk-deep: #1c1712;
+  --ink: #2b2420;
+  --ink-faded: #4a3f35;
+  --ink-pale: rgba(43, 36, 32, 0.55);
+  --forest: #3f5443;
+  --forest-light: #5c7a5f;
+  --stamp-red: #8a2e2e;
+  --stamp-red-light: #a8453f;
+  --coffee-ring: rgba(101, 67, 33, 0.22);
+  --coffee-ring-soft: rgba(101, 67, 33, 0.12);
+
+  --font-type: 'Special Elite', 'Courier New', monospace;
+  --font-caption: 'Crimson Text', serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top, #3a2f27 0%, var(--desk) 55%, var(--desk-deep) 100%);
+  font-family: var(--font-caption);
+  color: var(--ink);
+  padding: 3rem 1rem 5rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Faint desk-wood texture behind everything, via gradients only */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    repeating-linear-gradient(95deg, rgba(0,0,0,0.12) 0px, transparent 2px, transparent 7px),
+    repeating-linear-gradient(93deg, rgba(255,255,255,0.02) 0px, transparent 3px, transparent 10px);
+  pointer-events: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--stamp-red);
+  outline-offset: 3px;
+}
+
+.container-diary {
+  max-width: 780px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===================== MASTHEAD ===================== */
+
+.masthead {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.masthead-eyebrow {
+  font-family: var(--font-type);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--paper-shadow);
+  margin-bottom: 0.5rem;
+}
+
+.masthead-title {
+  font-family: var(--font-type);
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  color: var(--paper);
+  letter-spacing: 0.01em;
+  margin-bottom: 0.5rem;
+}
+
+.masthead-sub {
+  font-family: var(--font-caption);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: rgba(237, 227, 200, 0.65);
+  max-width: 46ch;
+  margin: 0 auto;
+}
+
+/* ===================== TYPEWRITER DEVICE ===================== */
+
+.typewriter-device {
+  background: linear-gradient(160deg, #3a2f27 0%, #241c17 100%);
+  border-radius: 16px;
+  padding: 1.75rem 1.5rem 1.25rem;
+  box-shadow:
+    0 24px 50px rgba(0,0,0,0.5),
+    inset 0 0 0 1px rgba(237,227,200,0.08);
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.carriage-rail {
+  height: 14px;
+  border-radius: 7px;
+  background: linear-gradient(180deg, #6b6862, #3a3833);
+  box-shadow: inset 0 2px 3px rgba(0,0,0,0.5);
+  margin-bottom: -8px;
+  position: relative;
+  z-index: 1;
+}
+
+/* The "sheet" of paper sitting inside the typewriter, feeding upward */
+.paper-sheet-well {
+  background: var(--desk-deep);
+  border-radius: 6px 6px 2px 2px;
+  padding: 1.5rem 1.25rem 0.75rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.paper-sheet {
+  background: var(--paper);
+  border-radius: 2px 2px 0 0;
+  min-height: 150px;
+  padding: 1.1rem 1.2rem 1.6rem;
+  box-shadow: 0 -6px 16px rgba(0,0,0,0.35), 0 2px 0 rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.paper-sheet::after {
+  /* faint horizontal rules like ruled diary paper */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 27px,
+    rgba(43,36,32,0.08) 28px
+  );
+  pointer-events: none;
+}
+
+.entry-textarea {
+  width: 100%;
+  min-height: 120px;
+  background: transparent;
+  border: none;
+  resize: none;
+  font-family: var(--font-type);
+  font-size: 1.05rem;
+  line-height: 28px;
+  color: var(--ink);
+  position: relative;
+  z-index: 1;
+}
+
+.entry-textarea::placeholder {
+  color: var(--ink-pale);
+  font-style: italic;
+}
+
+.entry-textarea:focus {
+  outline: none;
+}
+
+/* Blinking caret shown at the typing position when using the
+   character-by-character "echo" effect (see animations.css) */
+.type-caret {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--ink);
+  vertical-align: text-bottom;
+  margin-left: 1px;
+}
+
+.typewriter-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.char-counter {
+  font-family: var(--font-type);
+  font-size: 0.75rem;
+  color: rgba(237,227,200,0.55);
+  letter-spacing: 0.04em;
+}
+
+.char-counter.is-near-limit {
+  color: var(--stamp-red-light);
+}
+
+.file-entry-btn {
+  font-family: var(--font-type);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  color: var(--paper);
+  background: linear-gradient(160deg, var(--forest-light), var(--forest));
+  border: 1px solid rgba(237,227,200,0.25);
+  border-radius: 6px;
+  padding: 0.6rem 1.3rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.file-entry-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+.file-entry-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.compose-status {
+  font-family: var(--font-caption);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: rgba(237,227,200,0.6);
+  min-height: 1.2em;
+}
+
+.compose-status.is-error {
+  color: var(--stamp-red-light);
+}
+
+/* ===================== DIARY FEED ===================== */
+
+.feed-heading {
+  font-family: var(--font-type);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--paper-shadow);
+  text-align: center;
+  margin: 2.5rem 0 1.5rem;
+}
+
+.diary-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.diary-page {
+  background: var(--paper);
+  border-radius: 2px;
+  padding: 1.1rem 1.3rem 1.3rem;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.35), 0 1px 0 rgba(0,0,0,0.15);
+  position: relative;
+  transform: rotate(var(--page-tilt, 0deg));
+}
+
+/* Alternate a very slight tilt so the stack reads as loose pages,
+   not a rigid list — deliberate, not randomised per-render. */
+.diary-page:nth-child(3n)   { --page-tilt: -0.6deg; }
+.diary-page:nth-child(3n+1) { --page-tilt: 0.4deg; }
+.diary-page:nth-child(3n+2) { --page-tilt: -0.2deg; }
+
+.diary-page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    180deg,
+    transparent 0px,
+    transparent 25px,
+    rgba(43,36,32,0.06) 26px
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Ink-stain / coffee-ring marks — only on a subset of pages, placed
+   deliberately in a corner, signalling "this page has been sitting
+   here a while" rather than decorating every entry identically. */
+.diary-page.has-ring::before {
+  content: "";
+  position: absolute;
+  width: 74px;
+  height: 74px;
+  border-radius: 50%;
+  border: 6px solid var(--coffee-ring);
+  bottom: -18px;
+  right: -14px;
+  pointer-events: none;
+}
+
+.diary-page.has-ring-soft::before {
+  content: "";
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 5px solid var(--coffee-ring-soft);
+  top: -10px;
+  left: -12px;
+  pointer-events: none;
+}
+
+.entry-date {
+  font-family: var(--font-type);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-faded);
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.entry-text {
+  font-family: var(--font-type);
+  font-size: 1rem;
+  line-height: 27px;
+  color: var(--ink);
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.empty-feed {
+  text-align: center;
+  font-family: var(--font-caption);
+  font-style: italic;
+  color: rgba(237,227,200,0.6);
+  padding: 1.5rem 0;
+}
+
+.load-more-row {
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.load-more-btn {
+  font-family: var(--font-type);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--paper);
+  background: transparent;
+  border: 1px solid rgba(237,227,200,0.35);
+  border-radius: 999px;
+  padding: 0.55rem 1.4rem;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.load-more-btn:hover:not(:disabled) {
+  background: rgba(237,227,200,0.08);
+  border-color: rgba(237,227,200,0.6);
+}
+
+.load-more-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ===================== RESPONSIVE ===================== */
+
+@media (max-width: 575.98px) {
+  body { padding: 2rem 0.85rem 3rem; }
+  .typewriter-device { padding: 1.35rem 1rem 1rem; }
+  .entry-textarea { font-size: 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
