@@ -1,3 +1,34 @@
+<div align="center">
+
+<svg width="100%" height="160" viewBox="0 0 900 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Typewriter Diary banner">
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3b2a20"/>
+      <stop offset="45%" stop-color="#6b4a2f"/>
+      <stop offset="100%" stop-color="#c98a3e"/>
+    </linearGradient>
+    <linearGradient id="strip" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#e8c07a"/>
+      <stop offset="100%" stop-color="#f4e3c1"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="900" height="160" rx="18" fill="url(#paper)"/>
+
+  <!-- stacked "paper sheets" peeking from behind -->
+  <rect x="60" y="112" width="780" height="14" rx="4" fill="#f4e3c1" opacity="0.35"/>
+  <rect x="45" y="120" width="810" height="14" rx="4" fill="#f4e3c1" opacity="0.25"/>
+
+  <!-- typed-line strip -->
+  <rect x="60" y="52" width="780" height="6" fill="url(#strip)" opacity="0.8"/>
+
+  <text x="450" y="90" font-family="Georgia, 'Courier New', serif" font-size="46" font-weight="700" fill="#fdf3e0" text-anchor="middle" letter-spacing="2">
+    The Typewriter Diary
+  </text>
+</svg>
+
+</div>
+
 # The Typewriter Diary
 
 A shared, anonymous public journal styled like an old typewriter sitting on a
